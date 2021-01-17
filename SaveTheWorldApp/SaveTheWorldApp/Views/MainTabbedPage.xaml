@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaveTheWorldApp.Views.MainTabbedPage"
+            NavigationPage.HasNavigationBar="False"
+            BarTextColor="Black"
+            xmlns:video="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
+            xmlns:controls="clr-namespace:SaveTheWorldApp.Controls"
+            BarBackgroundColor="White"
+            BackgroundColor="White"
+            >
+    <ContentPage Title="Charity" Padding="20">
+        <StackLayout >
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+                
+                <Grid>
+                    <video:VideoView x:Name="webview1" HeightRequest="400" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="true"        
+                             WidthRequest="250" BackgroundColor="White"
+                             />
+                    <StackLayout>
+                        <ImageButton HeightRequest="30" WidthRequest="30" Command="{Binding ActionsCommand}" Margin="0,0,10,20" Source="dots.png" BackgroundColor="Transparent" HorizontalOptions="End"/>
+                        <ImageButton x:Name="globebtn" VerticalOptions="EndAndExpand" Source="earthicon" Command="{Binding GooglePayCommand}" CommandParameter="{x:Reference globebtn}" BackgroundColor="Transparent"/>
+
+                    </StackLayout>
+
+                </Grid>
+                <Label Text="SAVE" TextColor="#008000" FontAttributes="Bold" HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <Button BorderColor="Transparent" BorderWidth="2" HorizontalOptions="Center" FontSize="15" BackgroundColor="Transparent" Command="{Binding GoToFAQPageCommand}" TextColor="Black" Text="FAQs" Margin="0,20,0,0"/>
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="Leader Board" >
+        <ScrollView>
+            <StackLayout HorizontalOptions="Center" Margin="20">
+                <Grid VerticalOptions="FillAndExpand"
+                  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Frame Grid.Row="0" Padding="0" HasShadow="True" CornerRadius="6" BorderColor="LightGray" Margin="5">
+                        <controls:GradientColorStack Padding="20" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" StartColor="White" EndColor="LightGreen">
+                            <StackLayout VerticalOptions="CenterAndExpand">
+                                <Label Text="{Binding CurrentUser.Name}" Margin="0,10,0,0" TextColor="Black" HorizontalOptions="Center" FontSize="24"
+                                   />
+                                <Label Text="Contributed" TextColor="Black" HorizontalOptions="Center"/>
+                                <Label Text="{Binding CurrentUser.Contribution}" TextColor="Black" HorizontalOptions="Center" FontSize="Title"/>
+                            </StackLayout>
+                        </controls:GradientColorStack>
+                    </Frame>
+                    <StackLayout Grid.Row="1">
+                        <Label Text="Total Contribution" HorizontalOptions="Center" TextColor="Black"/>
+                        <Label Text="{Binding TotalContribution}" HorizontalOptions="Center" TextColor="Black" FontSize="30"
+                               FontAttributes="Bold"/>
+                        <Frame CornerRadius="40" Margin="0,20,.2,0" HorizontalOptions="Center" HasShadow="False" BackgroundColor="Black" HeightRequest="7" WidthRequest="7" Padding="0"/>
+                        <Frame CornerRadius="40" Margin="0,20,0,0" HorizontalOptions="Center" HasShadow="False" BackgroundColor="Black" HeightRequest="10" WidthRequest="10" Padding="0"/>
+                        <Frame CornerRadius="40" Margin=".5,20,1,0" HorizontalOptions="Center" HasShadow="False" BackgroundColor="Black" HeightRequest="13" WidthRequest="13" Padding="0"/>
+
+                    </StackLayout>
+                    <StackLayout Grid.Row="2" BindingContext="{Binding .}">
+                        <Label Text="Top Contributors Around The World" HorizontalTextAlignment="Center" FontSize="Title" HorizontalOptions="Center" TextColor="Black"/>
+                        <ListView HeightRequest="400" ItemsSource="{Binding TopContributors}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="60*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" VerticalOptions="Center" Text="{Binding Rank}" TextColor="Black" FontSize="18"/>
+                                            <Label Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Center" Text="{Binding Name}" TextColor="Black" FontSize="18"/>
+                                            <Label Grid.Column="2" VerticalOptions="Center" Text="{Binding Contribution}" HorizontalTextAlignment="Start" TextColor="Black" FontSize="18"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+</TabbedPage>

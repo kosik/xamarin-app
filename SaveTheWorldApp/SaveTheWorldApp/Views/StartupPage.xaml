@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaveTheWorldApp.Views.StartupPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:controls="clr-namespace:SaveTheWorldApp.Controls"
+             BackgroundColor="White"
+             >
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+           
+            <StackLayout VerticalOptions="CenterAndExpand">
+                
+                <Image Source="planthand"/>
+                    <Label TextColor="Black" Text="Green Thumb" FontSize="28" FontAttributes="Bold" Padding="30,10,30,10"/>
+                   
+                <Label TextColor="Black" FontSize="16" Padding="30,24,30,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                    <Span TextColor="#3c3c3c" Text="Save the planet one tree at a time. Don't have time or space to plant a tree! that's ok we will do it for you . No need to get ur hands dirty, just a little push of our button and that's it! for less $ then a cup of coffee you have planted a tree .
+A typical hardwood tree can take out 21700 grams of CO2 per year! which turns into many tonnes over its life time! which is stored forever!
+Push our button as many times as you like when ever you feel like planting or set and forget by subscribing to weekly or monthly plantings.
+Enjoy watching how many trees you have planted as well as the total of the greenthumb trees planted across all members.
+We want to incourage and acknowledge our members therefore our top 100 planters usernames will be listed in app for mega bragging rights.&#x0a;&#x0a;"/>
+                                    <Span Text="REGISTER TODAY!
+PLANT A TREE! ITS EASY!
+BE THE BEGINNING OF FUTURE FORESTS" FontAttributes="Bold"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Margin="0,30,0,0" HeightRequest="500" Padding="20,0,20,20">
+                    <Image Source="icon" HeightRequest="80" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
+                    <StackLayout Padding="2,0,2,0" VerticalOptions="CenterAndExpand">
+                        <StackLayout>
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout" Binding="{Binding IsLogin}" Value="true">
+                                    <Setter Property="IsVisible" Value="False"/>
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+                        
+                        <Label Text="Full Name" HorizontalOptions="Start" TextColor="Black"/>
+                        <controls:CustomLineEntry Keyboard="Text" TextColor="Black" Text="{Binding Name, Mode=TwoWay}"/>
+                        </StackLayout>
+                        <Label Text="Email" HorizontalOptions="Start" TextColor="Black"/>
+                        <controls:CustomLineEntry Keyboard="Email" TextColor="Black" Text="{Binding Email, Mode=TwoWay}"/>
+                        <Label Text="Password" HorizontalOptions="Start" TextColor="Black"/>
+                        <controls:CustomLineEntry IsPassword="True" TextColor="Black" Text="{Binding Password, Mode=TwoWay}"/>
+                        <Label Text="Password length must be atleast 6" FontSize="12" FontAttributes="Italic" TextColor="#3c3c3c"/>
+                    </StackLayout>
+                    <StackLayout VerticalOptions="EndAndExpand">
+                        <Button BorderColor="#008000" BorderWidth="2" FontSize="15" BackgroundColor="Transparent" Command="{Binding GoToLoginCommand}" TextColor="Black" Text="{Binding ButtonText}" Margin="0,0,0,20"/>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                            <Label TextColor="Black" Text="OR" HorizontalOptions="Center"/>
+                            <Label Text="Join Us" FontSize="15" TextColor="#008000" FontAttributes="Bold">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsLogin}" Value="false">
+                                        <Setter Property="Text" Value="Login"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToRegistrationCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                
+                    </StackLayout>
+                </StackLayout>
+            
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
